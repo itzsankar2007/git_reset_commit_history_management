@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Git Reset & Commit History Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow">GIT LEARNING PROJECT</p>
+      <h1>Reset. Review. Recover.</h1>
+      <p>Learn how to inspect commit history and safely undo changes with Git.</p>
+      <a class="button" href="#commands">Explore Commands</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <h2>What is commit history?</h2>
+      <p>Git records snapshots of your project as commits. Commit history helps you see what changed, who changed it, and when.</p>
+      <div class="terminal"><span class="prompt">$</span> git log --oneline</div>
+      <p class="muted">Example output:</p>
+      <div class="history">
+        <div><b>a1b2c3d</b><span>Update README</span></div>
+        <div><b>e4f5g6h</b><span>Add homepage</span></div>
+        <div><b>i7j8k9l</b><span>Initial commit</span></div>
+      </div>
+    </section>
+
+    <section id="commands" class="panel">
+      <h2>Important commands</h2>
+      <div class="command-grid">
+        <article class="command">
+          <h3>View history</h3>
+          <code>git log --oneline</code>
+          <p>Shows a compact list of commits.</p>
+          <button data-command="git log --oneline">Copy command</button>
+        </article>
+        <article class="command">
+          <h3>Check changes</h3>
+          <code>git status</code>
+          <p>Shows modified, staged, and untracked files.</p>
+          <button data-command="git status">Copy command</button>
+        </article>
+        <article class="command">
+          <h3>Soft reset</h3>
+          <code>git reset --soft HEAD~1</code>
+          <p>Moves HEAD back one commit and keeps changes staged.</p>
+          <button data-command="git reset --soft HEAD~1">Copy command</button>
+        </article>
+        <article class="command">
+          <h3>Mixed reset</h3>
+          <code>git reset --mixed HEAD~1</code>
+          <p>Moves HEAD back one commit and keeps changes in your working directory, unstaged.</p>
+          <button data-command="git reset --mixed HEAD~1">Copy command</button>
+        </article>
+        <article class="command warning">
+          <h3>Hard reset</h3>
+          <code>git reset --hard HEAD~1</code>
+          <p><strong>Warning:</strong> Discards tracked working-tree changes. Use only when you are sure.</p>
+          <button data-command="git reset --hard HEAD~1">Copy command</button>
+        </article>
+        <article class="command">
+          <h3>Undo safely</h3>
+          <code>git revert &lt;commit-id&gt;</code>
+          <p>Creates a new commit that reverses an earlier commit.</p>
+          <button data-command="git revert &lt;commit-id&gt;">Copy command</button>
+        </article>
+      </div>
+      <p id="copy-status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="panel">
+      <h2>Which reset should I use?</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Command</th><th>Commit removed?</th><th>Changes kept?</th></tr></thead>
+          <tbody>
+            <tr><td><code>--soft</code></td><td>Yes, locally</td><td>Staged</td></tr>
+            <tr><td><code>--mixed</code></td><td>Yes, locally</td><td>Unstaged</td></tr>
+            <tr><td><code>--hard</code></td><td>Yes, locally</td><td>Tracked changes discarded</td></tr>
+            <tr><td><code>git revert</code></td><td>No</td><td>Creates a reversing commit</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Safe workflow</h2>
+      <ol class="steps">
+        <li>Run <code>git status</code> to check your current changes.</li>
+        <li>Run <code>git log --oneline</code> to inspect recent commits.</li>
+        <li>If needed, create a backup branch: <code>git branch backup-before-reset</code>.</li>
+        <li>Choose <code>reset</code> for local history changes or <code>revert</code> to undo a shared commit safely.</li>
+        <li>Check the result with <code>git status</code> and <code>git log --oneline</code>.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer><div class="container">Git Reset & Commit History Management · Beginner Learning Project</div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
